@@ -18,14 +18,65 @@
           graph
         </ion-row>
         <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
-          input
+            <form style="display: block; margin: auto">
+                <input type="text" id="fname" name="fname" placeholder="Company">
+                <input type="text" id="fname" name="fname" placeholder="Position">
+                <input type="text" id="fname" name="fname" placeholder="Date">
+                <input type="submit" value="Submit">
+                <!--
+to log:
+$('#app-form').on('submit', function(){
+    var arr = $(this).serializeArray();
+    console.log(arr);
+    return false; //      /<-- Only, if you don't want the form to be submitted after above commands
+});
+-->
+            </form>
         </ion-row>
-        <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
-          recent
+        <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px; text-align: center;">
+        <ion-grid>
+            <ion-row style="margin-bottom: -1px; text-align: center;" class="recentItem">
+                <ion-col size="4" style="margin-bottom : -1px;">
+                    Company
+                </ion-col>
+                <ion-col size="4" style="margin-bottom : -1px;">
+                    Position
+                </ion-col>
+                <ion-col size="4" style="margin-bottom : -1px;">
+                    Date
+                </ion-col>
+            </ion-row>
+            
+            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentItem">
+                <ion-col size="4" style="margin-bottom : -1px;">
+                    Company
+                </ion-col>
+                <ion-col size="4" style="margin-bottom : -1px;">
+                    Position
+                </ion-col>
+                <ion-col size="4" style="margin-bottom : -1px;">
+                    Date
+                </ion-col>
+            </ion-row>
+        </ion-grid>
         </ion-row>
       </ion-col>
       <ion-col size="3" style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
-        notifications
+          <ion-grid>
+            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentNotif">
+                <ion-col>
+                Company (Date) <br> Position
+                </ion-col>
+                <ion-col> <input type="submit" value="Accepted"> </ion-col>
+            </ion-row>
+              
+            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentNotif">
+                <ion-col>
+                Company (Date) <br> Position
+                </ion-col>
+                <ion-col> <input type="submit" value="Follow Up"> </ion-col>
+            </ion-row>
+          </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>

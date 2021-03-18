@@ -8,19 +8,69 @@
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-      console.log("342");
+   <script type="text/javascript">
+      console.log("34sdf2");
+      //db operations
+      var db = openDatabase('mydb', '1.0', 'Test DB', 500 * 1024 * 1024);
+      var msg;
+
+      db.transaction(function (tx) {
+          tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (company, position, date)');
+          // tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")');
+          // tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")');
+          document.querySelector('#status').innerHTML =  msg;
+      })
+
+      db.transaction(function (tx) {
+          tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) {
+              var len = results.rows.length, i;
+              msg = "<p>Found rows: " + len + "</p>";
+              document.querySelector('#status').innerHTML +=  msg;
+
+              for (i = 0; i < len; i++) {
+                  msg = "<p><b>" + results.rows.item(i).company + "</b></p>";
+                  document.querySelector('#status').innerHTML +=  msg;
+              }
+          }, null);
+      });
+
+      //input
+      var inputArr = [];
+
+      function formsub() {
+          for(var i of document.getElementsByName("f")) {
+              inputArr.push(i.value);
+          }
+          db.transaction(function(tx) {
+              tx.executeSql("INSERT INTO LOGS VALUES(?,?,?)", inputArr, function (tx, results) {
+                  //do nothing
+              }, null);
+          });
+
+          //update recent
+          updateRecent();
+      }
+
+      function updateRecent() {
+          db.transaction(function(tx) {
+              tx.executeSql('SELECT * FROM LOGS ORDER BY DATE DESC LIMIT 10', [], function(tx, results) {
+                  for(var i = 0; i < results.rows.length; i++) {
+
+                  }
+              }, null);
+          })
+      }
 
   </script>
-    <script>
-        $('#app-form').on('submit', function(){
-            var arr = $(this).serializeArray();
-            console.log(arr);
-            return false; //      /<-- Only, if you don't want the form to be submitted after above commands
-        });
-    </script>
+<!--    <script>-->
+<!--        $('#submit-btn').click(function(){-->
+<!--            // var arr = $(this).serializeArray();-->
+<!--            console.log(document.getElementById("company").value);-->
+<!--            return false; //      /<&#45;&#45; Only, if you don't want the form to be submitted after above commands-->
+<!--        });-->
+<!--    </script>-->
 </head>
 <body>
 <ion-content>
@@ -31,11 +81,10 @@
           graph
         </ion-row>
         <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
-            <form style="display: block; margin: auto">
-                <input type="text" id="company" name="company" placeholder="Company">
-                <input type="text" id="position" name="position" placeholder="Position">
-                <input type="text" id="date" name="date" placeholder="Date">
-                <input type="submit" value="Submit">
+            <input type="text" id="company" name="f" placeholder="Company">
+            <input type="text" id="position" name="f" placeholder="Position">
+            <input type="text" id="date" name="f" placeholder="Date">
+            <button id="submit-btn" onclick="formsub()" value="Submit">Submit</button>
                 <!--
 to log:
 $('#app-form').on('submit', function(){
@@ -44,33 +93,35 @@ $('#app-form').on('submit', function(){
     return false; //      /<-- Only, if you don't want the form to be submitted after above commands
 });
 -->
-            </form>
         </ion-row>
         <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px; text-align: center;">
         <ion-grid>
-            <ion-row style="margin-bottom: -1px; text-align: center;" class="recentItem">
-                <ion-col size="4" style="margin-bottom : -1px;">
-                    Company
-                </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
-                    Position
-                </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
-                    Date
-                </ion-col>
+            <ion-row style="margin-bottom: -1px; text-align: center;" id="recentItem">
+
             </ion-row>
-            
-            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentItem">
-                <ion-col size="4" style="margin-bottom : -1px;">
-                    Company
-                </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
-                    Position
-                </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
-                    Date
-                </ion-col>
-            </ion-row>
+<!--            <ion-row style="margin-bottom: -1px; text-align: center;" class="recentItem">-->
+<!--                <ion-col size="4" style="margin-bottom : -1px;">-->
+<!--                    Company-->
+<!--                </ion-col>-->
+<!--                <ion-col size="4" style="margin-bottom : -1px;">-->
+<!--                    Position-->
+<!--                </ion-col>-->
+<!--                <ion-col size="4" style="margin-bottom : -1px;">-->
+<!--                    Date-->
+<!--                </ion-col>-->
+<!--            </ion-row>-->
+<!--            -->
+<!--            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentItem">-->
+<!--                <ion-col size="4" style="margin-bottom : -1px;">-->
+<!--                    Company-->
+<!--                </ion-col>-->
+<!--                <ion-col size="4" style="margin-bottom : -1px;">-->
+<!--                    Position-->
+<!--                </ion-col>-->
+<!--                <ion-col size="4" style="margin-bottom : -1px;">-->
+<!--                    Date-->
+<!--                </ion-col>-->
+<!--            </ion-row>-->
         </ion-grid>
         </ion-row>
       </ion-col>

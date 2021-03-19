@@ -141,77 +141,61 @@
   <ion-grid>
     <ion-row>
       <ion-col size="9">
-        <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px;">
-            <button onclick="jobTimeFunction()" id="job-time">Applications Over Time</button>
-            <button onclick="jobTypesFunction()" id="job-types">Types of Applications</button>
+        <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px; margin-top: -5px">
+            <button onclick="jobTimeFunction()" id="job-time" style="border-width: 1px; border-style: solid; margin-top: -1px; margin-left: -1px">Applications Over Time</button>
+            <button onclick="jobTypesFunction()" id="job-types" style="border-width: 1px; border-style: solid; margin-top: -1px; margin-left: -1px; ">Types of Applications</button>
             <canvas id="line"></canvas>
             <canvas id="pie"></canvas>
         </ion-row>
-        <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px;">
+        <ion-row style="height: 35px; border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px;">
             <form style="display: block; margin: auto">
                 <input type="text" id="company" name="company" placeholder="Company">
                 <input type="text" id="position" name="position" placeholder="Position">
                 <input type="date" id="date" name="date" min="2000-01-01" max="2030-12-31">
                 <input type="submit" value="Submit">
-                <!--
-to log:
-$('#app-form').on('submit', function(){
-    var arr = $(this).serializeArray();
-    console.log(arr);
-    return false; //      /<-- Only, if you don't want the form to be submitted after above commands
-});
--->
             </form>
         </ion-row>
         <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px; text-align: center;">
         <ion-grid>
             <ion-row style="text-align: center;" class="recentItem">
-                <ion-col size="4">
-                    Company
-                </ion-col>
-                <ion-col size="4">
-                    Position
-                </ion-col>
-                <ion-col size="4">
-                    Date
-                </ion-col>
+                <ion-col size="4"> Amazon </ion-col>
+                <ion-col size="4"> Paid Internship </ion-col>
+                <ion-col size="4"> 03/18/2021 </ion-col>
             </ion-row>
-            
             <ion-row style="text-align: center;" class="recentItem">
-                <ion-col size="4">
-                    Company
-                </ion-col>
-                <ion-col size="4">
-                    Position
-                </ion-col>
-                <ion-col size="4">
-                    Date
-                </ion-col>
+                <ion-col size="4"> Google </ion-col>
+                <ion-col size="4"> Full-time Job </ion-col>
+                <ion-col size="4"> 03/11/2021 </ion-col>
+            </ion-row>
+            <ion-row style="text-align: center;" class="recentItem">
+                <ion-col size="4"> Apple </ion-col>
+                <ion-col size="4"> Paid Internship </ion-col>
+                <ion-col size="4"> 03/11/2021 </ion-col>
             </ion-row>
         </ion-grid>
         </ion-row>
       </ion-col>
-      <ion-col size="3" style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : 2px; margin-top: 35x">
+      <ion-col size="3" style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : 2px; margin-left: -8px">
           <ion-grid>
             <ion-row style="text-align: center;" class="recentNotif">
                 <ion-col>
-                Company (Date) <br> Position
+                Amazon (03/18/2021) <br> Paid Internship
                 </ion-col>
-                <ion-col> <input type="submit" value="Accepted" style="background-color: forestgreen; color: white"> </ion-col>
+                <ion-col> <br> <input type="submit" value="Accepted" style="background-color: #2DD232; color: white"> </ion-col>
             </ion-row>
               
             <ion-row style="text-align: center;" class="recentNotif">
                 <ion-col>
-                Company (Date) <br> Position
+                Google (03/11/2021) <br> Full-time Job
                 </ion-col>
-                <ion-col> <input type="submit" value="Follow Up" style="background-color: darkorange; color: white"> </ion-col>
+                <ion-col> <br> <input type="submit" value="Follow Up" style="background-color: #322DD2; color: white; "> </ion-col>
             </ion-row>
               
             <ion-row style="text-align: center;" class="recentNotif">
                 <ion-col>
-                Company (Date) <br> Position
+                Apple (03/11/2021) <br> Paid Internship
                 </ion-col>
-                <ion-col> <input type="submit" value="Rejected" style="background-color: darkred; color: white"> </ion-col>
+                <ion-col> <br> <input type="submit" value="Rejected" style="background-color: #D2322D; color: white"> </ion-col>
             </ion-row>
           </ion-grid>
       </ion-col>

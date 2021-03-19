@@ -21,24 +21,25 @@
 <script src="js/Chart.min.js"></script>
 <script src="js/utils.js"></script>
 <script>
-	var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	var config = {
-		type: 'line',
-		data: {
+    
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var lineGraph = {
+        type: 'line',
+        data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-		datasets: [{
+        datasets: [{
             label: 'Full-time Jobs',
             backgroundColor: window.chartColors.blue,
             borderColor: window.chartColors.blue,
             data: [3, 1, 0, 0, 5, 7, 11],
             fill: false,
         },  {
-			label: 'Paid Internships',
-			backgroundColor: window.chartColors.red,
-			borderColor: window.chartColors.red,
-			data: [3, 5, 0, 10, 0, 0, 5, 5],
-			fill: false,
-		},  {
+            label: 'Paid Internships',
+            backgroundColor: window.chartColors.red,
+            borderColor: window.chartColors.red,
+            data: [3, 5, 0, 10, 0, 0, 5, 5],
+            fill: false,
+        },  {
             label: 'Unpaid Internships',
             backgroundColor: window.chartColors.green,
             borderColor: window.chartColors.green,
@@ -46,75 +47,84 @@
             fill: false,            
         }]
         },
-		options: {
-		  responsive: true,
+        options: {
+          responsive: true,
             title: {
                 display: true,
                 text: 'Applications Over Time'
             },
             tooltips: {
-				mode: 'index',
-				intersect: false,
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			scales: {
-				xAxes: [{
-					display: true,
-					scaleLabel: {
-						display: true,
-						labelString: 'Month'
-					}
-				}],
-				yAxes: [{
-					display: true,
-					scaleLabel: {
-						display: true,
-						labelString: 'Applications'
-					}
-				}]
-			}
-		}
-	};
-//    var config = {
-//        type: 'pie',
-//		data: {
-//            datasets: [{
-//                data: [20, 30, 40],
-//				backgroundColor: [
-//					window.chartColors.red,
-////					window.chartColors.orange,
-//					window.chartColors.yellow,
-////					window.chartColors.green,
-//					window.chartColors.blue,
-//				],
-//				label: 'Types of Applications'
-//            }],
-//			labels: ['Full Time Jobs','Paid Internships','Unpaid Internships']
-//        },
-//		options: {
-//		  responsive: true
-//		}
-//    };
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Month'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Applications'
+                    }
+                }]
+            }
+        }
+    };
+    
+    
+    var pieGraph = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [20, 30, 40],
+                backgroundColor: [
+                    window.chartColors.red,
+//                    window.chartColors.orange,
+                    window.chartColors.yellow,
+//					window.chartColors.green,
+                    window.chartColors.blue,
+                ],
+                label: 'Types of Applications'
+            }],
+            labels: ['Full Time Jobs','Paid Internships','Unpaid Internships']
+        },
+        options: {
+          responsive: true
+        }
+    };
     
 	window.onload = function() {
-		var ctx = document.getElementById('canvas').getContext('2d');
-		window.myLine = new Chart(ctx, config);
-        
-		//var ctx = document.getElementById('chart-area').getContext('2d');
-        //window.myPie = new Chart(ctx, config);
+        jobTimeFunction()
 	};
     
     // document.getElementById('job-time').addEventListener('click', function() {
         
     // });
+    
     const jobTimeFunction = () => {
+        document.getElementById('pie').style.display = "none"
+        document.getElementById('line').style.display = "block"
+		var ctx = document.getElementById('line').getContext('2d');
+		window.myLine = new Chart(ctx, lineGraph);
+        
         console.log('job time function working');
     };
 
-    const jobTypesFunction = () => {
+    const jobTypesFunction = () => {     
+        document.getElementById('line').style.display = "none"
+        document.getElementById('pie').style.display = "block"
+		var ctx = document.getElementById('pie').getContext('2d');
+        window.myPie = new Chart(ctx, pieGraph);
+        
         console.log('job types function working')
     };
 
@@ -131,12 +141,13 @@
   <ion-grid>
     <ion-row>
       <ion-col size="9">
-        <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
+        <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px;">
             <button onclick="jobTimeFunction()" id="job-time">Applications Over Time</button>
             <button onclick="jobTypesFunction()" id="job-types">Types of Applications</button>
-            <canvas id="canvas"></canvas>
+            <canvas id="line"></canvas>
+            <canvas id="pie"></canvas>
         </ion-row>
-        <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
+        <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px;">
             <form style="display: block; margin: auto">
                 <input type="text" id="company" name="company" placeholder="Company">
                 <input type="text" id="position" name="position" placeholder="Position">
@@ -152,51 +163,51 @@ $('#app-form').on('submit', function(){
 -->
             </form>
         </ion-row>
-        <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px; text-align: center;">
+        <ion-row style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : -3px; text-align: center;">
         <ion-grid>
-            <ion-row style="margin-bottom: -1px; text-align: center;" class="recentItem">
-                <ion-col size="4" style="margin-bottom : -1px;">
+            <ion-row style="text-align: center;" class="recentItem">
+                <ion-col size="4">
                     Company
                 </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
+                <ion-col size="4">
                     Position
                 </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
+                <ion-col size="4">
                     Date
                 </ion-col>
             </ion-row>
             
-            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentItem">
-                <ion-col size="4" style="margin-bottom : -1px;">
+            <ion-row style="text-align: center;" class="recentItem">
+                <ion-col size="4">
                     Company
                 </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
+                <ion-col size="4">
                     Position
                 </ion-col>
-                <ion-col size="4" style="margin-bottom : -1px;">
+                <ion-col size="4">
                     Date
                 </ion-col>
             </ion-row>
         </ion-grid>
         </ion-row>
       </ion-col>
-      <ion-col size="3" style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
+      <ion-col size="3" style="border-color: black; border-width: 3px; border-style:solid; margin-bottom : 2px; margin-top: 35x">
           <ion-grid>
-            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentNotif">
+            <ion-row style="text-align: center;" class="recentNotif">
                 <ion-col>
                 Company (Date) <br> Position
                 </ion-col>
                 <ion-col> <input type="submit" value="Accepted" style="background-color: forestgreen; color: white"> </ion-col>
             </ion-row>
               
-            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentNotif">
+            <ion-row style="text-align: center;" class="recentNotif">
                 <ion-col>
                 Company (Date) <br> Position
                 </ion-col>
                 <ion-col> <input type="submit" value="Follow Up" style="background-color: darkorange; color: white"> </ion-col>
             </ion-row>
               
-            <ion-row style="margin-bottom : -1px; text-align: center;" class="recentNotif">
+            <ion-row style="text-align: center;" class="recentNotif">
                 <ion-col>
                 Company (Date) <br> Position
                 </ion-col>

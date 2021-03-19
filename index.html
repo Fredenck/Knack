@@ -107,13 +107,22 @@
         //window.myPie = new Chart(ctx, config);
 	};
     
-    document.getElementById('job-time').addEventListener('click', function() {
+    // document.getElementById('job-time').addEventListener('click', function() {
         
-    });
+    // });
+    const jobTimeFunction = () => {
+        console.log('job time function working');
+    };
+
+    const jobTypesFunction = () => {
+        console.log('job types function working')
+    };
+
+    // document.getElementById('job-time').onclick(() => console.log('hello'))
     
-    document.getElementById('job-types').addEventListener('click', function() {
+    // document.getElementById('job-types').addEventListener('click', function() {
         
-    });
+    // });
 </script>
     
 </head>
@@ -123,8 +132,8 @@
     <ion-row>
       <ion-col size="9">
         <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
-            <button id="job-time">Applications Over Time</button>
-            <button id="job-types">Types of Applications</button>
+            <button onclick="jobTimeFunction()" id="job-time">Applications Over Time</button>
+            <button onclick="jobTypesFunction()" id="job-types">Types of Applications</button>
             <canvas id="canvas"></canvas>
         </ion-row>
         <ion-row style="border-color: black; border-width: 5px; border-style:solid; margin-bottom : -1px;">
